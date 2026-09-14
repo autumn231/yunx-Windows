@@ -72,7 +72,9 @@ compose.desktop {
             packageName = "YunX"
             // CI 推 v* 标签时通过 -PpackageVersion= 注入；本地构建用默认版本
             packageVersion = providers.gradleProperty("packageVersion").getOrElse("1.2.6")
-            description = "云析 YunX - 网盘分享链接解析与高速下载（夸克/百度）"
+            // 注意：description 必须纯 ASCII——非 ASCII（中文）在英文 locale 的打包环境上
+            // 会让 jpackage/WiX 抛 MalformedInputException("Input length = 1")
+            description = "YunX - Cloud drive share link parser and downloader (Quark/Baidu)"
             vendor = "YunX Desktop"
             copyright = "Copyright (C) 2026 CYQawa, AGPL-3.0"
 
