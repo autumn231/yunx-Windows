@@ -47,8 +47,8 @@ jobs:
         with:
           name: YunX-windows-installer
           path: |
-            build/compose/binaries/main/msi/*.msi
-            build/compose/binaries/main/exe/*.exe
+            build/compose/binaries/main-release/msi/*.msi
+            build/compose/binaries/main-release/exe/*.exe
           if-no-files-found: error
 
       # 打包失败时输出 jpackage 的具体错误（错误详情写在 runner 本地日志文件里）
@@ -71,5 +71,5 @@ jobs:
         uses: softprops/action-gh-release@v2
         with:
           files: |
-            build/compose/binaries/main/msi/*.msi
-            build/compose/binaries/main/exe/*.exe
+            build/compose/binaries/main-release/msi/*.msi
+            build/compose/binaries/main-release/exe/*.exe
