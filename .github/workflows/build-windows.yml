@@ -51,6 +51,20 @@ jobs:
             build/compose/binaries/main/exe/*.exe
           if-no-files-found: error
 
+      # 打包失败时输出 jpackage 的具体错误（错误详情写在 runner 本地日志文件里）
+      - name: Dump jpackage logs (on failure)
+        if: failure()
+        shell: pwsh
+        run: |
+          Get-ChildItem build/compose/logs -Recurse -Filter *.txt -ErrorAction SilentlyContinue | ForEach-Object {
+            Write-Host "===== $($_.FullName) ====="
+            Get-Content $_.FullName
+          }
+          Get-ChildItem build/compose/tmp -Filter *.args.txt -ErrorAction SilentlyContinue | ForEach-Object {
+            Write-Host "===== $($_.FullName) ====="
+            Get-Content $_.FullName
+          }
+
       # 推送 v* 标签时自动创建 Release 并附带安装包
       - name: Attach to GitHub Release
         if: startsWith(github.ref, 'refs/tags/v')
