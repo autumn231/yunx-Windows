@@ -1,0 +1,8 @@
+# 换行符固定：防止 Windows 检出时 gradlew 变 CRLF 导致 bash 无法执行
+* text=auto
+gradlew text eol=lf
+*.sh text eol=lf
+*.bat text eol=crlf
+*.jar binary
+*.png binary
+*.ico binary
